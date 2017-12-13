@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace SeleniumWebDriverUITests.Pages
 {
-    public class LoginPage
+    public class LoginPage : PageObject
     {
         [FindsBy(How=How.Id, Using="email")]
         private IWebElement _loginInput;
@@ -14,12 +14,17 @@ namespace SeleniumWebDriverUITests.Pages
         [FindsBy(How=How.Id, Using="loginButton")]
         private IWebElement _submitButton;
 
-        private IWebDriver _driver;
-
-        public LoginPage(IWebDriver webDriver)
+        public LoginPage(IWebDriver webDriver) : base(webDriver)
         {
-            _driver = webDriver;
-            PageFactory.InitElements(_driver, this);
+        }
+
+        public DashboardPage LoginUsingCredentials(string email, string password)
+        {
+            _loginInput.SendKeys(email);
+            _passwordInput.SendKeys(password);
+            _submitButton.Click();
+
+            return new DashboardPage(_driver);
         }
     }
 }

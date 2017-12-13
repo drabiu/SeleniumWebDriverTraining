@@ -8,6 +8,10 @@ namespace SeleniumWebDriverUITests
     [TestClass]
     public class InvoiceNinjaTests
     {
+        private const string _url = "http://79.137.68.21/login";
+        private const string _email = "test1@geekacademy.test";
+        private const string _password = "5143testX";
+
         private IWebDriver _driver;
 
         [TestInitialize]
@@ -19,15 +23,7 @@ namespace SeleniumWebDriverUITests
         [TestMethod]
         public void LoginPageShouldShowDashboardAfterEnteringCredentials()
         {
-            //var loginPage = new LoginPage(_driver);
-            _driver.Navigate().GoToUrl("http://79.137.68.21/login");
-            IWebElement loginInput = _driver.FindElement(By.Id("email"));
-            IWebElement passwordInput = _driver.FindElement(By.Id("password"));
-            IWebElement submitButton = _driver.FindElement(By.Id("loginButton"));
-
-            loginInput.SendKeys("test1@geekacademy.test");
-            passwordInput.SendKeys("5143testX");
-            submitButton.Click();
+            LogIn(_url, _email, _password);
 
             string pageTitle = _driver.Title;
 
@@ -35,8 +31,15 @@ namespace SeleniumWebDriverUITests
         }
 
         [TestMethod]
-        public void TestMethod2()
+        public void DashboardShouldSuccessfullyLogoutUser()
         {
+            var dashboard = LogIn(_url, _email, _password);
+
+            dashboard.LogoutUser();
+
+            string pageTitle = _driver.Title;
+
+            Assert.AreEqual("Invoice Ninja | Free Open-Source Online Invoicing", pageTitle);
         }
 
         [TestMethod]
@@ -48,6 +51,14 @@ namespace SeleniumWebDriverUITests
         public void End()
         {
             _driver.Quit();
+        }
+
+        private DashboardPage LogIn(string url, string email, string password)
+        {
+            _driver.Navigate().GoToUrl(url);
+            var loginPage = new LoginPage(_driver);
+
+            return loginPage.LoginUsingCredentials(email, password);
         }
     }
 }
