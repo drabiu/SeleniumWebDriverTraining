@@ -65,6 +65,18 @@ namespace SeleniumWebDriverUITests
             Assert.AreEqual("Dashboard | Invoice Ninja", pageTitle);
         }
 
+        [TestMethod]
+        public void LeftMenuAfterClickingLinkShouldDisplayTasksPage()
+        {
+            var dashboard = LogIn(_url, _email, _password);
+
+            var tasks = dashboard.GoToTasksPage();
+
+            string pageTitle = _driver.Title;
+
+            Assert.AreEqual("Tasks | Invoice Ninja", pageTitle);
+        }
+
         [TestCleanup]
         public void End()
         {
