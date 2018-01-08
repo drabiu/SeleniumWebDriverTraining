@@ -57,8 +57,10 @@
   <ItemGroup>
     <Compile Include="InvoiceNinjaTests.cs" />
     <Compile Include="Pages\DashboardPage.cs" />
+    <Compile Include="Pages\LeftMenuPage.cs" />
     <Compile Include="Pages\LoginPage.cs" />
     <Compile Include="Pages\PageObject.cs" />
+    <Compile Include="Pages\ReportsPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -36,15 +36,33 @@ namespace SeleniumWebDriverUITests
             var dashboard = LogIn(_url, _email, _password);
 
             dashboard.LogoutUser();
-
             string pageTitle = _driver.Title;
 
             Assert.AreEqual("Invoice Ninja | Free Open-Source Online Invoicing", pageTitle);
         }
 
         [TestMethod]
-        public void TestMethod3()
+        public void LeftMenuAfterClickingLinkShouldDisplayReportsPage()
         {
+            var dashboard = LogIn(_url, _email, _password);
+
+            var reports = dashboard.GoToReportsPage();
+            string pageTitle = _driver.Title;
+
+            Assert.AreEqual("Charts & Reports | Invoice Ninja", pageTitle);
+        }
+
+        [TestMethod]
+        public void LeftMenuAfterClickingLinkShouldDisplayDashboardPage()
+        {
+            var dashboard = LogIn(_url, _email, _password);
+
+            var reports = dashboard.GoToReportsPage();
+            dashboard = reports.GoToDashboardPage();
+
+            string pageTitle = _driver.Title;
+
+            Assert.AreEqual("Dashboard | Invoice Ninja", pageTitle);
         }
 
         [TestCleanup]

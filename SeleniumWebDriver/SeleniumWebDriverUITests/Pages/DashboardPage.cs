@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace SeleniumWebDriverUITests.Pages
 {
-    public class DashboardPage : PageObject
+    public class DashboardPage : LeftMenuPage
     {
         [FindsBy(How=How.XPath, Using = "//*[@id='navbar-collapse-1']/div/div/ul/li[3]/a")]
         private IWebElement _logoutLink;
